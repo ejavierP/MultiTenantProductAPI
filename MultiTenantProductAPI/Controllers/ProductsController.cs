@@ -68,14 +68,15 @@ namespace API.Controllers
             }
         }
 
-        [HttpPut("{slugTenant}")]
+        [HttpPut("{slugTenant}/{productId}")]
 
-        public async Task<IActionResult> UpdateProduct(CreateOrUpdateProductDTO productRequest)
+        public async Task<IActionResult> UpdateProduct([FromBody] CreateOrUpdateProductDTO productRequest,Guid productId)
         {
             try
             {
                 await _productService.Update(new Products
                 {
+                    Id = productId,
                     Description = productRequest.Description,
                     Name = productRequest.Name,
                     Price = productRequest.Price
