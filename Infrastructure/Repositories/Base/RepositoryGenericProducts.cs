@@ -1,17 +1,20 @@
-﻿
-using Dominio.Interfaces.Common;
+﻿using Dominio.Interfaces.Common;
 using Infraestructura.Persistence;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Infraestructura.Repositories.Base
 {
-    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class , new()
+    public class RepositoryGenericProducts<TEntity> : IRepositoryProducts<TEntity> where TEntity : class, new()
     {
         protected readonly DbContext _dbContext;
         private readonly DbSet<TEntity> _dbSet;
-        public Repository(OrganizationsContext dbContext)
+        public RepositoryGenericProducts(ProductsContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<TEntity>();
@@ -56,7 +59,7 @@ namespace Infraestructura.Repositories.Base
         }
         public virtual async Task Update(TEntity entity)
         {
-             _dbSet.Update(entity);
+            _dbSet.Update(entity);
             await _dbContext.SaveChangesAsync();
         }
 

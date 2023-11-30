@@ -21,8 +21,8 @@ namespace Aplicacion.Services
     {
        
         private readonly ITokenService  _tokenService;
-        private readonly IRepository<Users> _userRepository;
-        public AccountService(ITokenService tokenService,IRepository<Users> userRepository)
+        private readonly IRepositoryOrganizations<Users> _userRepository;
+        public AccountService(ITokenService tokenService, IRepositoryOrganizations<Users> userRepository)
         {
            _userRepository = userRepository;
            _tokenService = tokenService;

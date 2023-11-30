@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dominio.Interfaces.Common
 {
-    public interface IRepository<T> where T : class
+    public interface IRepositoryProducts<T> where T : class
     {
         Task<T> Get(Expression<Func<T, bool>> filter = null, string includeProperties = "");
         Task<T> GetById(object id);

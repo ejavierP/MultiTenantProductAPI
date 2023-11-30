@@ -10,5 +10,6 @@ namespace Aplicacion.Interfaces
     public interface IOrganizationService
     {
         Task CreateOrganization(Organizations entity);
+        Task<Organizations> Get(string slugTenant);
     }
 }
