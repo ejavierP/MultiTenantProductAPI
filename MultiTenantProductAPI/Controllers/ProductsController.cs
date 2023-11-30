@@ -1,5 +1,8 @@
 ﻿using Aplicacion.Interfaces;
 using Dominio.DTOS;
+using Dominio.DTOS.Organization;
+using Dominio.DTOS.Products;
+using Infraestructura.Models.Products;
 using Infraestructura.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -31,5 +34,75 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("{slugTenant}/{productId}")]
+        public async Task<IActionResult> GetById(Guid productId)
+        {
+            try
+            {
+                var products = await _productService.GetById(productId);
+                return Ok(products);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("{slugTenant}")]
+        public async Task<IActionResult> CreateProduct(CreateOrUpdateProductDTO productRequest)
+        {
+            try
+            {
+                await _productService.Add(new Products
+                {
+                    Description = productRequest.Description,
+                    Name = productRequest.Name,
+                    Price = productRequest.Price
+                });
+                return Ok(productRequest);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("{slugTenant}")]
+
+        public async Task<IActionResult> UpdateProduct(CreateOrUpdateProductDTO productRequest)
+        {
+            try
+            {
+                await _productService.Update(new Products
+                {
+                    Description = productRequest.Description,
+                    Name = productRequest.Name,
+                    Price = productRequest.Price
+                });
+                return Ok(productRequest);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpDelete("{slugTenant}/{productId}")]
+
+        public async Task<IActionResult> Remove(Guid productId)
+        {
+            try
+            {
+                await _productService.Remove(productId);
+                return Ok("Product removed succefully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
+
+
 }

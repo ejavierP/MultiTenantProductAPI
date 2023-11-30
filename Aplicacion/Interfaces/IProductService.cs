@@ -12,7 +12,7 @@ namespace Aplicacion.Interfaces
         public Task Add(Products entity);
         public Task<IEnumerable<Products>> GetAll();
         public Task<Products> GetById(object id);
-        public Task Remove(Products products);
+        public Task Remove(object id);
         public Task Update(Products products);
 
 

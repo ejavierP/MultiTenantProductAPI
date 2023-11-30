@@ -32,17 +32,16 @@ namespace Aplicacion.Services
             return await _productsRepository.GetById(id);
         }
 
-        public async Task Remove(Products products)
+        public async Task Remove(object id)
         {
 
-            var productRemove = await this.GetById(products.Id);
+            var productRemove = await this.GetById(id);
             await _productsRepository.Remove(productRemove);
         }
 
         public async Task Update(Products products)
         {
-            var productUpdated = await this.GetById(products.Id);
-            await _productsRepository.Update(productUpdated);
+            await _productsRepository.Update(products);
         }
     }
 }

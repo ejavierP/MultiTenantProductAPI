@@ -33,12 +33,12 @@ namespace Infraestructura.Repositories.Base
             foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 result = result.Include(includeProperty);
 
-            return await result.FirstOrDefaultAsync(filter);
+            return await result.AsNoTracking().FirstOrDefaultAsync(filter);
         }
 
         public virtual async Task<IEnumerable<TEntity>> GetAll()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbSet.AsNoTracking().ToListAsync();
         }
 
         public virtual async Task<TEntity> GetById(object id)
