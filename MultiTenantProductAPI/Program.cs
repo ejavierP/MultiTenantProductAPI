@@ -63,13 +63,6 @@ var connectionStringOptions = new ConnectionStringOptions
 
 builder.Services.Configure<JWTOptions>(configuration.GetSection("JWTOptions"));
 
-var test = new JWTOptions
-{
-    Audience = configuration.GetValue<string>("JWTOptions:Audience"),
-    Issuer = configuration.GetValue<string>("JWTOptions:Issuer"),
-    Secret = configuration.GetValue<string>("JWTOptions:Secret")
-};
-
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
