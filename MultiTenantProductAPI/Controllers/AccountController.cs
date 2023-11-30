@@ -8,10 +8,10 @@ namespace API.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class AccountContnroller : ControllerBase
+    public class AccountController : ControllerBase
     {
         private readonly IAccountService _accountService;
-        public AccountContnroller(IAccountService accountService)
+        public AccountController(IAccountService accountService)
         {
 
             _accountService = accountService;
@@ -28,7 +28,7 @@ namespace API.Controllers
                 var cookieOptions = new CookieOptions
                 {
                     HttpOnly = true,
-                    Expires = DateTime.UtcNow.AddHours(1)
+                    Expires = DateTime.UtcNow.AddHours(2)
                 };
 
 
@@ -37,7 +37,7 @@ namespace API.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(400, new APIResponse<LoginUserResponseDTO>(null, false));
+                return StatusCode(400, new APIResponse<LoginUserResponseDTO>(null, false,ex.Message));
             }
 
         }
