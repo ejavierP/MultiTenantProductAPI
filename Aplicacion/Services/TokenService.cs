@@ -33,7 +33,7 @@ namespace Aplicacion.Services
 
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                      new Claim(ClaimTypes.Name,email),
+                      new Claim(ClaimTypes.NameIdentifier,email)
                     }),
                     Expires = DateTime.UtcNow.AddHours(_jwtOptions.Value.ExpiryHours),
                     Issuer = _jwtOptions.Value.Issuer,

@@ -1,4 +1,5 @@
 ﻿using Dominio.DTOS.Account;
+using Infraestructura.Models.Organizations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace Aplicacion.Interfaces
     {
         Task<LoginUserResponseDTO> Authenticate(LoginUserRequestDTO loginRequest);
 
-        Task CreateUser(CreateUserRequestDTO createUserRequest);
+        Task CreateUser(Users user);
     }
 }

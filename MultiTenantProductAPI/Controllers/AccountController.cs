@@ -1,6 +1,10 @@
 ﻿using Aplicacion.Interfaces;
+using Aplicacion.Services;
 using Dominio.DTOS;
 using Dominio.DTOS.Account;
+using Dominio.DTOS.Organization;
+using Infraestructura.Models.Organizations;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +20,8 @@ namespace API.Controllers
 
             _accountService = accountService;
         }
+
+
         [HttpPost]
         [Route("Authenticate")]
         [ProducesResponseType(typeof(APIResponse<LoginUserResponseDTO>), 200)]
@@ -38,6 +44,31 @@ namespace API.Controllers
             catch (Exception ex)
             {
                 return StatusCode(400, new APIResponse<LoginUserResponseDTO>(null, false,ex.Message));
+            }
+
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(APIResponse<string>), 200)]
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserRequestDTO createUserRequest)
+        {
+            try
+            {
+                await _accountService.CreateUser(new Users
+                {
+                    Email = createUserRequest.Email,
+                    Password = createUserRequest.Password,
+                    CreatedDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    OrganizationId =  createUserRequest.OrganizationId,
+                });
+
+
+                return Ok(new APIResponse<string>("Usuario creado con exito", true, null));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(400, new APIResponse<string>(null, false, ex.Message));
             }
 
         }

@@ -47,15 +47,15 @@ namespace Aplicacion.Services
             };
         }
 
-        public async Task CreateUser(CreateUserRequestDTO createUserRequest)
+        public async Task CreateUser(Users user)
         {
-            var user = await _userRepository.Get(user => user.Email == createUserRequest.Email);
+            var userEmail = await _userRepository.Get(user => user.Email == user.Email);
             Regex passwordValidatioRegex = new Regex("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$");
-            if (user != null)
+            if (userEmail != null)
             {
                 throw new Exception("Ya existe un usuario con ese email");
             }
-            var validatePassword = passwordValidatioRegex.Match(createUserRequest.Password);
+            var validatePassword = passwordValidatioRegex.Match(user.Password);
 
             if (!validatePassword.Success)
             {

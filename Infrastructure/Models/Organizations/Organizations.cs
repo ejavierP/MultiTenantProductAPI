@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Infraestructura.Models.Organizations
 {
     [Table("Organizations")]
-    public class Organizations
+    public class Organizations: AuditInfo
     {
         [Key]
         public Guid Id { get; set; }

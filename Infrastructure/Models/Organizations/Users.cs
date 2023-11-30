@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Infraestructura.Models.Organizations
 {
     [Table("Users")]
-    public class Users
+    public class Users: AuditInfo
     {
         [Key]
         public Guid Id { get; set; }
