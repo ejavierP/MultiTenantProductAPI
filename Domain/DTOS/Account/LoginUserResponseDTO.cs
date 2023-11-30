@@ -8,7 +8,7 @@ namespace Dominio.DTOS.Account
 {
     public class LoginUserResponseDTO
     {
-        public string AccesToken { get; set; }
+        public string AccessToken { get; set; }
         public string Tenant { get; set; }
     }
 }

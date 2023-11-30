@@ -42,7 +42,7 @@ namespace Aplicacion.Services
 
             return new LoginUserResponseDTO
             {
-                AccesToken = token,
+                AccessToken = token,
                 Tenant = user.Organizations.SlugTenant
             };
         }

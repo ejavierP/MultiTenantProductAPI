@@ -1,4 +1,5 @@
-﻿using Dominio.DTOS;
+﻿using Aplicacion.Interfaces;
+using Dominio.DTOS;
 using Dominio.DTOS.Account;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +10,12 @@ namespace API.Controllers
     [ApiController]
     public class AccountContnroller : ControllerBase
     {
+        private readonly IAccountService _accountService;
+        public AccountContnroller(IAccountService accountService)
+        {
+
+            _accountService = accountService;
+        }
         [HttpPost]
         [Route("Authenticate")]
         [ProducesResponseType(typeof(APIResponse<LoginUserResponseDTO>), 200)]
